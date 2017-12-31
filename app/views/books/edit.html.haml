@@ -1,8 +1,8 @@
 %h2 Edit Book
  
-= form_tag book_path(@book), :method => :put do
+= form_tag books_path(@book), :method => :put do
  
-   = label :book, :title, 'Title'
+  = label :book, :title, 'Title'
   = text_field :book, :title
  
   = label :book, :genre, 'Genre'
