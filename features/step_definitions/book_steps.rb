@@ -1,51 +1,9 @@
-# Add a declarative step here for populating the DB with movies.
-
-value = 0
-    Given /the following books exist/ do |books_table|
-         value = 0
-         bookss_table.hashes.each do |book|
-        Book.create(book)
-        value += 1
-    end
-end
-
-# Make sure that one string (regexp) occurs before or after another one
-#   on the same page
-
-Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
-  #  ensure that that e1 occurs before e2.
-  # puts page.body
-  match = /#{e1}.*#{e2}/m =~ page.body
-  assert !match.nil?
-end
-
-Then /I should see all of the books/ do
-  page.should have_css("table#books tbody tr",:count => value.to_i)
-end
-
-Then /I should not see all of the books/ do
-  page.should have_no_css("table#books tbody tr")
-end
-
-Then /^the author of "([^"]*)" should be "([^"]*)"$/ do |title, author|
-  book = Book.find_by_title(title)
-  book.author.should == author
-end
-
-
-# Make it easier to express checking or unchecking several boxes at once
-#  "When I uncheck the following ratings: PG, G, R"
-#  "When I check the following ratings: G"
-
-When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
-  rating_list.delete!("\"")
-  if uncheck.nil?
-    rating_list.split(',').each do |field|
-      check("ratings["+field.strip+"]")
-    end
-  else
-    rating_list.split(',').each do |field|
-      uncheck("ratings["+field.strip+"]")
-    end
+Given /the following books exist/ do |books_table|
+  books_table.hashes.each do |book|
+    Book.create book
   end
+end
+
+Then(/^the author of "([^"]*)" should be "([^"]*)"$/) do |arg1, arg2|
+  Book.find_by_title(arg1).author == arg2
 end

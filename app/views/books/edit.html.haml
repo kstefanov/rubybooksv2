@@ -1,17 +1,23 @@
 %h2 Edit Book
  
-= form_tag books_path(@book), :method => :put do
+= form_tag book_path(@book), :method => :put do
  
   = label :book, :title, 'Title'
-  = text_field :book, :title
+  = text_field :book, 'title'
+  
+  = label :book, :author, 'Author'
+  = text_field :book, 'author'
+  
+  = label :book, :isbn, 'ISBN'
+  = text_field :book, :isbn
  
   = label :book, :genre, 'Genre'
   = select :book, :genre, ['Science fiction','Drama','Action and Adventure','Romance','Mystery','Horror']
  
-  = label :book, :isbn, 'ISBN'
-  = text_field :book, :isbn
- 
   = label :book, :publish_date, 'Published On'
   = date_select :book, :publish_date
- 
-  = submit_tag 'Save Changes'
+  
+  = label :book, :description, 'Description'
+  = text_field :book, 'description'
+  
+  = submit_tag 'Update Book Info'

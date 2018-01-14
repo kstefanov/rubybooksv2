@@ -48,10 +48,12 @@ group :development do
 end
 group :production do
   # make sure the following gems are in your production group:
-  gem 'pg'              # use PostgreSQL in production (Heroku)
+  gem 'pg', '~> 0.20'            # use PostgreSQL in production (Heroku)
   gem 'rails_12factor'  # Heroku-specific production settings
 end
 group :test do
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels' # some pre-fabbed step definitions  
   gem 'database_cleaner' # to clear Cucumber's test database between runs

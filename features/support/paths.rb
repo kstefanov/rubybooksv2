@@ -15,14 +15,17 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/books'
-    when /^the MyFavouriteBooks home page$/
-      '/books'
-    when /^the (edit|details) page for "(.*)"$/
-      book = Book.find_by_title($2)
-      $1 == "details" ? book_path(book) : edit_book_path(book)
-    when /^the Similar Movies page for "(.*)"$/
-      book = Book.find_by_title($1)
-      same_author_path(book)
+    when /^the MyFavouriteBooks home page/
+      '/books'  
+    when /^the Create New Book page/
+      '/books/new'
+    when /^the edit page for "([^"]+)"$/
+      edit_book_path(Book.find_by_title($1).id)
+    when /^the details page for "(.*)"/
+      book_path(Book.find_by_title $1)
+    when /^the Similar Books page for "(.*)"$/
+      search_similar_books_path(Book.find_by_title($1).id)
+  
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

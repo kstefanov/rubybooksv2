@@ -7,18 +7,19 @@ Feature: search for books by author
 Background: books in database
  
   Given the following books exist:
-  | title                 | genre           | author       | publish_date |
-  | It                    | Horror          | Stephen King |   1986-09-15 |
-  | The Martian           | Science fiction | Andy Weir    |   2014-02-11 |
-  | To Kill a Mockingbird | Drama           |              |   1960-07-11 |
-  | Carrie                | Horror          | Stephen King |   1974-04-05 |
- 
+  | title                 | genre           | isbn | author       | publish_date |
+  | It                    | Horror          | 0000 | Stephen King |   1986-09-15 |
+  | The Martian           | Science fiction | 1111 | Andy Weir    |   2014-02-11 |
+  | To Kill a Mockingbird | Drama           | 2222 |              |   1960-07-11 |
+  | Carrie                | Horror          | 3333 | Stephen King |   1974-04-05 |
+
 Scenario: add author to existing book
   When I go to the edit page for "To Kill a Mockingbird"
   And  I fill in "Author" with "Harper Lee"
   And  I press "Update Book Info"
-  Then the author of "To Kill a Mockingbird" should be "Harper Lee"
- 
+  Then I should be on the details page for "To Kill a Mockingbird"
+  And the author of "To Kill a Mockingbird" should be "Harper Lee"
+
 Scenario: find book with same author
   Given I am on the details page for "It"
   When  I follow "Find Books With Same Author"
