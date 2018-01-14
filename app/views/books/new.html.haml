@@ -2,6 +2,13 @@
  
 = form_tag books_path, :method => :post do
  
+  - unless @book.errors.empty?
+    #warning
+      Errors prevented this book from being #{controller.action_name}d:
+      %ul
+        - @book.errors.full_messages.each do |error|
+          %li= error
+          
   = label :book, :title, 'Title'
   = text_field :book, 'title'
   
